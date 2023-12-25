@@ -1,0 +1,13 @@
+all: test_inst
+
+inst.o: inst.c
+	gcc -Wall -c inst.c -o inst.o
+
+test.o: test.c
+	gcc -Wall -c -finstrument-functions test.c -o test.o
+
+test_inst: inst.o test.o
+	gcc inst.o test.o -o test_inst
+
+clean:
+	rm -f test_inst inst.o test.o
